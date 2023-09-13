@@ -23,7 +23,7 @@ const ConceptWrapper = styled.div`
   }
 `;
 
-function Concept() {
+function Drag() {
   const { pathname } = useLocation();
   const canvasRef = useRef(null);
   class Postit {
@@ -49,7 +49,7 @@ function Concept() {
       document.addEventListener("pointerup", this.onUp.bind(this), false);
 
       // 애니메이팅 시작
-      window.requestAnimationFrame(this.animate.bind(this));
+      requestAnimationFrame(this.animate.bind(this));
     }
 
     animate() {
@@ -144,7 +144,7 @@ function Concept() {
   useEffect(() => {
     canvasRef.current.width = window.innerWidth;
     canvasRef.current.height = window.innerHeight;
-    if (pathname === "/concept") {
+    if (pathname === "/drag") {
       new Postit();
     } else {
       canvasRef.current = null;
@@ -158,4 +158,4 @@ function Concept() {
   );
 }
 
-export default Concept;
+export default Drag;

@@ -4,17 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import HomeIcon from "@mui/icons-material/Home";
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
-import StayCurrentLandscapeIcon from "@mui/icons-material/StayCurrentLandscape";
-import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import PhoneCallbackIcon from "@mui/icons-material/PhoneCallback";
+
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 
 const Modal = styled.div`
   display: flex;
   width: 280px;
   height: 100px;
   z-index: 100;
-  left: 80vw;
+  left: 80%;
   padding-top: 1rem;
   color: white;
   position: fixed;
@@ -25,7 +26,6 @@ const Modal = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    padding: 4px;
     box-shadow: 0 4px 2px hsla(0, 0%, 0%, 0.1), 0 4px 4px hsla(0, 0%, 0%, 0.1),
       0 4px 8px hsla(0, 0%, 0%, 0.1);
     span {
@@ -35,6 +35,62 @@ const Modal = styled.div`
       p {
         margin-top: 3px;
         text-align: center;
+      }
+    }
+  }
+  .noneEvent {
+    pointer-events: none;
+  }
+  .none {
+    display: none;
+  }
+`;
+const Sidebar = styled.div`
+  display: flex;
+  width: 20vw;
+  height: 50vh;
+  z-index: 101;
+  right: 0%;
+  padding-top: 1rem;
+  color: white;
+  position: fixed;
+  section {
+    display: flex;
+    padding: 4px;
+    flex-direction: column;
+    background-color: #f8f8f8;
+
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 4px;
+    box-shadow: 0 4px 2px hsla(0, 0%, 0%, 0.1), 0 4px 4px hsla(0, 0%, 0%, 0.1),
+      0 4px 8px hsla(0, 0%, 0%, 0.1);
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      /* border: 2px solid black; */
+      border-radius: 5px;
+      li {
+        border: 2px solid #f8f8f8;
+        padding: 3px;
+        padding-top: 0.35rem;
+        padding-left: 1rem;
+        color: black;
+        margin: 1px;
+        flex: 1;
+        border-radius: 3px;
+        font-family: "Gowun Batang", serif;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      li:hover {
+        color: whitesmoke;
+        border: 2px solid #213555;
+        background-color: #4f709c;
       }
     }
   }
@@ -96,15 +152,11 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-export default function Header({ screenButton, setScreenButton }) {
+export default function Header() {
   const [isModal, setIsModal] = useState(false);
+  const [isSidebar, setIsSidebar] = useState(false);
   const navigate = useNavigate();
-  function toggle() {
-    setScreenButton(!screenButton);
-    if (!screenButton) {
-    } else if (screenButton) {
-    }
-  }
+
   function onModal() {
     setIsModal(!isModal);
   }
@@ -129,13 +181,11 @@ export default function Header({ screenButton, setScreenButton }) {
           </span>
           <span
             onClick={() => {
-              toggle();
+              setIsSidebar(!isSidebar);
             }}
           >
-            <StayCurrentLandscapeIcon
-              className={`${screenButton ? "none" : ""}`}
-            />
-            <FullscreenExitIcon className={`${screenButton ? "" : "none"}`} />
+            <MenuOpenIcon className={`${isSidebar ? "none" : ""}`} />
+            <UnfoldLessIcon className={`${isSidebar ? "" : "none"}`} />
           </span>
         </nav>
       </HeaderWrapper>
@@ -151,6 +201,40 @@ export default function Header({ screenButton, setScreenButton }) {
           </span>
         </section>
       </Modal>
+      <Sidebar>
+        <section className={`${isSidebar ? "" : "none noneEvent"}`}>
+          <ul>
+            <li
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              PROFILE
+            </li>
+            <li
+              onClick={() => {
+                navigate("/project");
+              }}
+            >
+              PROJECT
+            </li>
+            <li
+              onClick={() => {
+                navigate("/drag");
+              }}
+            >
+              DRAG Animation
+            </li>
+            <li
+              onClick={() => {
+                navigate("/scratch");
+              }}
+            >
+              SCRATCH Animation
+            </li>
+          </ul>
+        </section>
+      </Sidebar>
     </>
   );
 }

@@ -6,20 +6,20 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import Header from "./Header/Header.js";
 import Footer from "./footer/Footer.js";
 import Profile from "./path_profile/profile.js";
-import Concept from "./path_concept/Concept.js";
+import Drag from "./path_concept/Drag.js";
 import Project from "./path_project/Project.js";
-import Terminal from "./path_terminal/Terminal.js";
+import Scratch from "./path_scratch/scratch.js";
 
 import ScrollToTop from "./features/scrollToTop.js";
-import { ScrollAnimationContainer2 } from "./features/ScrollAnimationContainer2.js";
+// import { ScrollAnimationContainer2 } from "./features/ScrollAnimationContainer2.js";
 
 import { WaveGroup } from "./animation/wave/wavegroup.js";
 import { Ball } from "./animation/bouncing/ball.js";
 import BackgroundSection from "./BackgroundSection.js";
-import LogoWaveSection from "./LogoWaveSection.js";
-import ButtonPopSection from "./ButtonPopSection.js";
+// import LogoWaveSection from "./LogoWaveSection.js";
+// import ButtonPopSection from "./ButtonPopSection.js";
 
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 const globalStyle = createGlobalStyle`
 .gowun {
   font-family: 'Gowun Batang', serif;
@@ -30,7 +30,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
   background-color: #fafad2;
   width: 100%;
-  height: 220vh;
+  height: 200vh;
   padding: none;
   margin-top: 56px;
   .click {
@@ -57,7 +57,7 @@ const AppWrapper = styled.div`
     .waveCanvas {
       background-color: #fafad2;
       width: 120vw;
-      height: 100vh;
+      height: 102vh;
     }
   }
   .bouncing {
@@ -65,21 +65,19 @@ const AppWrapper = styled.div`
     position: absolute;
     .bouncingCanvas {
       width: 100vw;
-      height: 220vh;
+      height: 200vh;
     }
   }
 `;
 
 function App() {
-  const handle = useFullScreenHandle();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const canvasRef2 = useRef(null);
   const canvasRef3 = useRef(null);
-  const [screenButton, setScreenButton] = useState(false);
   const [isBookClicked, setIsBookClicked] = useState(false);
-  const pathArr = ["profile", "concept", "project", "terminal"];
+  // const pathArr = ["profile", "drag", "project", "scratch"];
   const [buttonPop, setButtonPop] = useState([false, false, false, false]);
   const [logoKey, setLogoKey] = useState(0);
   const bookOnClick = (e) => {
@@ -131,17 +129,18 @@ function App() {
       this.ctx = this.canvas.getContext("2d");
       this.stageWidth = window.innerWidth;
       this.stageHeight = window.innerHeight * 2.2 + 56;
-      this.count = 4;
-      this.radius = 60;
-      this.speed = 15;
+      this.count = 5;
+      this.radius = 30;
+      this.speed = 4;
       this.balls = [];
 
       for (let i = 0; i < this.count; i++) {
+        let direction = i % 2 === 0 ? 1 : -1;
         this.balls[i] = new Ball(
           this.stageWidth,
           this.stageHeight,
           this.radius,
-          (this.speed * i) / 2 + this.speed
+          ((this.speed * i) / 2 + this.speed) * direction
         );
       }
 
@@ -171,7 +170,7 @@ function App() {
 
   return (
     <div>
-      <Header screenButton={screenButton} setScreenButton={setScreenButton} />
+      <Header />
 
       <ScrollToTop />
       <Routes>
@@ -190,19 +189,19 @@ function App() {
             path="/"
             element={
               <>
-                <LogoWaveSection
+                {/* <LogoWaveSection
                   bookOnClick={bookOnClick}
                   logoKey={logoKey}
                   isBookClicked={isBookClicked}
-                />
+                /> */}
 
-                <ButtonPopSection pathArr={pathArr} buttonPop={buttonPop} />
+                {/* <ButtonPopSection pathArr={pathArr} buttonPop={buttonPop} /> */}
                 <AppWrapper>
                   <BackgroundSection />
-                  <section className="click">
+                  {/* <section className="click">
                     <ArrowUpwardIcon className="svg" />
                     <div>CLICK HERE!</div>
-                  </section>
+                  </section> */}
                   <section className="wave">
                     <canvas className="waveCanvas" ref={canvasRef2} />
                   </section>
@@ -227,19 +226,19 @@ function App() {
             }
           />
           <Route
-            path="/concept"
+            path="/drag"
             element={
               <>
-                <Concept />
+                <Drag />
               </>
             }
           />
 
           <Route
-            path="/terminal"
+            path="/scratch"
             element={
               <>
-                <Terminal />
+                <Scratch />
                 <Footer />
               </>
             }

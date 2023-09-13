@@ -46,7 +46,7 @@ const ButtonSection = styled.section`
       }
       animation: profilepop 700ms ease-in-out forwards;
     }
-    .concept {
+    .drag {
       @keyframes conceptpop {
         100% {
           transform: translate(-300px, -200px) scale(1) rotate(550deg);
@@ -72,7 +72,7 @@ const ButtonSection = styled.section`
       }
       animation: projectpop 700ms ease-in-out forwards;
     }
-    .terminal {
+    .scratch {
       @keyframes terminalpop {
         100% {
           transform: translate(-350px, 200px) scale(1) rotate(400deg);

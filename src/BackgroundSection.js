@@ -91,7 +91,7 @@ function BackgroundSection() {
         <div class="wave -one"></div>
         <div class="wave -two"></div>
         <div class="wave -three"></div>
-        <div class="title">Alternative</div>
+        <div class="title">CANVAS Animation</div>
       </div>
     </AnimationWrapper>
   );

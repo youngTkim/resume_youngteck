@@ -7,7 +7,7 @@ export class Ball {
     const diameter = this.radius * 2;
 
     this.x = diameter + Math.random() * stageWidth - diameter;
-    this.y = diameter + 56 + Math.random() * stageHeight - diameter - 56;
+    this.y = diameter + 56 + Math.random() * (stageHeight - diameter - 56);
   }
 
   draw(ctx, stageWidth, stageHeight) {

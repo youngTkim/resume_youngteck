@@ -25,7 +25,6 @@ export class Dialog {
 
     this.pos.x = Math.random() * (window.innerWidth - WIDTH);
     this.pos.y = Math.random() * (window.innerHeight - HEIGHT);
-
     this.target = this.pos.clone();
     this.prevPos = this.pos.clone();
   }
